@@ -88,7 +88,7 @@ DATABASES = {
                 'USER': 'root',      # Replace with your MySQL username
                 'PASSWORD': '7rdCzy2Bao5MNV2CfVnUSEnj5IaZb8cn', # Replace with your MySQL password
                 'HOST': 'dpg-d3a0dteuk2gs73e0ffa0-a',             # Or the IP address/hostname of your MySQL server
-                'PORT': '5432',                  # Default MySQL port
+                'PORT': '3306',                  # Default MySQL port
             }
         }
 
