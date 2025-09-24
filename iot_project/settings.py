@@ -4,6 +4,7 @@
 import os
 from pathlib import Path
 import pymysql
+import dj_database_url
 pymysql.install_as_MySQLdb()
 
 
@@ -82,15 +83,12 @@ WSGI_APPLICATION = 'iot_project.wsgi.application'
     }
 }'''
 DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.mysql',
-                'NAME': 'airkpi',  # Replace with your database name
-                'USER': 'root',      # Replace with your MySQL username
-                'PASSWORD': '7rdCzy2Bao5MNV2CfVnUSEnj5IaZb8cn', # Replace with your MySQL password
-                'HOST': 'dpg-d3a0dteuk2gs73e0ffa0-a',             # Or the IP address/hostname of your MySQL server
-                'PORT': '3306',                  # Default MySQL port
-            }
-        }
+    'default': dj_database_url.config(
+        default=os.getenv("postgresql://root:7rdCzy2Bao5MNV2CfVnUSEnj5IaZb8cn@dpg-d3a0dteuk2gs73e0ffa0-a/airkpi"),  # Render me DATABASE_URL set karo
+        conn_max_age=600,
+        ssl_require=True
+    )
+}
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [],
