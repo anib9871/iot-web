@@ -86,9 +86,9 @@ DATABASES = {
                 'ENGINE': 'django.db.backends.mysql',
                 'NAME': 'airkpi',  # Replace with your database name
                 'USER': 'root',      # Replace with your MySQL username
-                'PASSWORD': '1234', # Replace with your MySQL password
-                'HOST': 'localhost',             # Or the IP address/hostname of your MySQL server
-                'PORT': '3306',                  # Default MySQL port
+                'PASSWORD': '7rdCzy2Bao5MNV2CfVnUSEnj5IaZb8cn', # Replace with your MySQL password
+                'HOST': 'dpg-d3a0dteuk2gs73e0ffa0-a',             # Or the IP address/hostname of your MySQL server
+                'PORT': '5432',                  # Default MySQL port
             }
         }
 
