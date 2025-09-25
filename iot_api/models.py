@@ -96,7 +96,7 @@ class DeviceReadingLog(models.Model):
     SENSOR_ID = models.IntegerField()
     PARAMETER_ID = models.IntegerField()
     READING_DATE = models.DateField(auto_now_add=True)
-    READING_TIME = models.IntegerField()
+    READING_TIME = models.TimeField(auto_now_add=True)
     READING = models.FloatField(null=True)
     ORGANIZATION_ID = models.IntegerField(null=True)
     CENTRE_ID = models.IntegerField(null=True)
@@ -105,9 +105,11 @@ class DeviceReadingLog(models.Model):
         db_table = "device_reading_log"
 
     def save(self, *args, **kwargs):
+        if not self.READING_DATE:
+            self.READING_DATE = timezone.now().date()
+        # Ensure READING_TIME is set
         if not self.READING_TIME:
-            now = timezone.now().time()
-            self.READING_TIME = now.hour * 3600 + now.minute * 60 + now.second
+            self.READING_TIME = timezone.now().time().replace(microsecond=0)
         super().save(*args, **kwargs)  # Save reading first
 
         # ================== Fetch Parameter ==================
