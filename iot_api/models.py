@@ -105,11 +105,9 @@ class DeviceReadingLog(models.Model):
         db_table = "device_reading_log"
 
     def save(self, *args, **kwargs):
-        if not self.READING_DATE:
-            self.READING_DATE = timezone.now().date()
         if not self.READING_TIME:
-            self.READING_TIME = timezone.now().time().replace(microsecond=0)
-
+            now = timezone.now().time()
+            self.READING_TIME = now.hour * 3600 + now.minute * 60 + now.second
         super().save(*args, **kwargs)  # Save reading first
 
         # ================== Fetch Parameter ==================
