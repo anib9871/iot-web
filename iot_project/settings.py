@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'iot_project.wsgi.application'
     }
 }'''
 DATABASES = {
-    "default": dj_database_url.config(default=os.getenv("postgresql://airkpi_mclp_user:cbAT63ju7Y0A5kmAACIOimsc0x5ceZIj@dpg-d3acrta4d50c73d5v8u0-a/airkpi_mclp"))
+    "default": dj_database_url.config(default=os.getenv("DATABASE_URL"))
 }
 
 REST_FRAMEWORK = {
