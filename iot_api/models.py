@@ -5,7 +5,6 @@ from django.utils import timezone
 from datetime import datetime
 import requests
 from django.core.mail import send_mail
-from .alerts import send_normalized_alert  # import your alert function
 
 # ================== SMS Config ==================
 SMS_API_URL = "http://www.universalsmsadvertising.com/universalsmsapi.php"
