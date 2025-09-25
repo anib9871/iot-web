@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # django_heroku.settings(locals())
 SECRET_KEY = 'django-insecure-your-secret-key'
 DEBUG = True
-ALLOWED_HOSTS = ["*","https://16de7fd271a3.ngrok-free.app/"]
+ALLOWED_HOSTS = ["iot-web.onrender.com", "*"]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://16de7fd271a3.ngrok-free.app",   # tumhari current ngrok URL
@@ -83,11 +83,7 @@ WSGI_APPLICATION = 'iot_project.wsgi.application'
     }
 }'''
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv("postgresql://root:7rdCzy2Bao5MNV2CfVnUSEnj5IaZb8cn@dpg-d3a0dteuk2gs73e0ffa0-a/airkpi"),  # Render me DATABASE_URL set karo
-        conn_max_age=600,
-        ssl_require=True
-    )
+    "default": dj_database_url.config(default=os.getenv("postgresql://airkpi_mclp_user:cbAT63ju7Y0A5kmAACIOimsc0x5ceZIj@dpg-d3acrta4d50c73d5v8u0-a/airkpi_mclp"))
 }
 
 REST_FRAMEWORK = {
