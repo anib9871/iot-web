@@ -96,7 +96,7 @@ class DeviceReadingLog(models.Model):
     SENSOR_ID = models.IntegerField()
     PARAMETER_ID = models.IntegerField()
     READING_DATE = models.DateField(auto_now_add=True)
-    READING_TIME = models.TimeField(auto_now_add=True)
+    READING_TIME = models.IntegerField()
     READING = models.FloatField(null=True)
     ORGANIZATION_ID = models.IntegerField(null=True)
     CENTRE_ID = models.IntegerField(null=True)
