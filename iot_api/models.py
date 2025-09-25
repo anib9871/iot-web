@@ -5,6 +5,7 @@ from django.utils import timezone
 from datetime import datetime
 import requests
 from django.core.mail import send_mail
+from .alerts import send_normalized_alert  # import your alert function
 
 # ================== SMS Config ==================
 SMS_API_URL = "http://www.universalsmsadvertising.com/universalsmsapi.php"
@@ -157,7 +158,7 @@ class DeviceReadingLog(models.Model):
                 active_alarm.IS_ACTIVE = 0
                 active_alarm.LST_UPD_DT = timezone.now().date()
                 active_alarm.save()
-
+                
                     # # Device ka naam fetch kar
                     # device = MasterDevice.objects.filter(DEVICE_ID=active_alarm.DEVICE_ID).first()
                     # devnm = device.DEVICE_NAME if device else f"Device {active_alarm.DEVICE_ID}"
