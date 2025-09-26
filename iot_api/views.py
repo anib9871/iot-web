@@ -24,8 +24,6 @@ from .serializers import (
 
 from django.contrib import messages
 from django.db import connection
-from .utils import send_sms
-
 # -------------------------
 # Login View
 # -------------------------
