@@ -1,5 +1,3 @@
-# iot_api/migrations/0006_alter_devicereadinglog_reading_time.py
-
 from django.db import migrations, models
 
 class Migration(migrations.Migration):
@@ -9,23 +7,46 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        # Step 1: Django ko field type ka update batao
-        migrations.AlterField(
-            model_name='devicereadinglog',
-            name='READING_TIME',
-            field=models.TimeField(),
-        ),
-        # Step 2: PostgreSQL me integer -> time conversion
+        # Step 1: Add temporary column as time
         migrations.RunSQL(
             """
             ALTER TABLE iot_api_devicereadinglog
-            ALTER COLUMN "READING_TIME" TYPE time
-            USING make_time(
+            ADD COLUMN temp_reading_time time;
+            """,
+            reverse_sql=migrations.RunSQL.noop,
+        ),
+        # Step 2: Copy & convert data
+        migrations.RunSQL(
+            """
+            UPDATE iot_api_devicereadinglog
+            SET temp_reading_time = make_time(
                 "READING_TIME" / 10000,
                 ("READING_TIME" / 100) % 100,
                 "READING_TIME" % 100
             );
             """,
             reverse_sql=migrations.RunSQL.noop,
+        ),
+        # Step 3: Drop old column
+        migrations.RunSQL(
+            """
+            ALTER TABLE iot_api_devicereadinglog
+            DROP COLUMN "READING_TIME";
+            """,
+            reverse_sql=migrations.RunSQL.noop,
+        ),
+        # Step 4: Rename temp column
+        migrations.RunSQL(
+            """
+            ALTER TABLE iot_api_devicereadinglog
+            RENAME COLUMN temp_reading_time TO "READING_TIME";
+            """,
+            reverse_sql=migrations.RunSQL.noop,
+        ),
+        # Step 5: Update Django model
+        migrations.AlterField(
+            model_name='devicereadinglog',
+            name='READING_TIME',
+            field=models.TimeField(),
         ),
     ]
