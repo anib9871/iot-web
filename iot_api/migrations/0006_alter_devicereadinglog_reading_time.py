@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             """
             ALTER TABLE iot_api_devicereadinglog
             ALTER COLUMN "READING_TIME" TYPE time
-            USING (make_interval(hours => "READING_TIME"/10000, minutes => ("READING_TIME"/100)%100, seconds => "READING_TIME"%100));
+            USING make_time("READING_TIME"/10000, ("READING_TIME"/100)%100, "READING_TIME"%100);
             """,
             reverse_sql=migrations.RunSQL.noop,
         ),
