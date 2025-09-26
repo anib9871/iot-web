@@ -3,10 +3,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('iot_api', '0005_previous_migration'),
+        ('iot_api', '0005_alter_devicereadinglog_reading_date_and_more'),
     ]
 
     operations = [
+        migrations.AlterField(
+            model_name='devicereadinglog',
+            name='READING_TIME',
+            field=models.TimeField(),
+        ),
         migrations.RunSQL(
             """
             ALTER TABLE iot_api_devicereadinglog
